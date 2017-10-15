@@ -1,0 +1,10 @@
+The following libraries must be in the WEB-INF/lib/ folder.
+Other libraries are described in earlier directories : classpath/lib
+
+c3p0-0.9.5.2
+hibernate-c3p0-5.2.10.Final
+jackson-annotations-2.8.0
+jackson-core-2.8.2
+jackson-databind-2.8.2
+jstl-1.2
+mchange-commons-java-0.2.11

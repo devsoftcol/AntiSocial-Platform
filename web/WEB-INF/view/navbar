@@ -1,0 +1,68 @@
+<nav class="header navbar navbar-default navbar-fixed-top">
+        <aside class="aside aside-1">
+            <sec:authorize access="isAuthenticated()">
+                <div class="toolbar">
+                    <div class="toolbar-node">
+                        <div class="btn-group">
+                            <button id="toolbar-add" type="button" class="btn btn-default dropdown-toggle"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-folder-open-o" aria-hidden="true"></i>
+                            </button>
+                            <ul class="dropdown-menu category">
+                                <input id="search-category" class="form-control" placeholder="Search category">
+                                <a href="/article/add" class="btn btn-default" type="button"><i class="fa fa-newspaper-o" aria-hidden="true"></i> Add</a>
+                                <c:forEach items="${categories}" var="category">
+                                    <div class="search-category-name">
+                                        <a href="/category/${category.categoryName}">
+                                            <img src="/resources/pic/cat/${category.categoryName}.jpg"/>
+                                            <p>${category.categoryName}</p>
+                                        </a>
+                                    </div>
+                                </c:forEach>
+
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </sec:authorize>
+        </aside>
+        <div class="wrapper">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
+                        aria-expanded="false" aria-controls="navbar">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">AntiSocial</a>
+            </div>
+            <div id="navbar" class="collapse navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <sec:authorize access="isAuthenticated()">
+                        <li>
+                            <div class="btn-group">
+                                <input id="search" class="form-control dropdown-toggle search-bar"
+                                       data-toggle="dropdown"
+                                       placeholder="Search" maxlength="240">
+                                <ul id="search-result" class="dropdown-menu">
+                                </ul>
+                            </div>
+                        </li>
+                        <li><a href="/user/${userName}">Profile</a></li>
+                        <li><a href="/user/${userName}/settings">Settings</a></li>
+                    </sec:authorize>
+                    <li><a href="/about">About</a></li>
+                    <sec:authorize access="isAuthenticated()">
+                        <li><a href="<c:url value="/logout" />">Logout</a></li>
+                        <li><img src="/resources/pic/${userName}.jpg"/></li>
+                    </sec:authorize>
+
+                    <sec:authorize access="isAnonymous()">
+                        <li><a href="<c:url value="/login" />">Login</a></li>
+                    </sec:authorize>
+
+                </ul>
+            </div>
+        </div>
+    </nav>

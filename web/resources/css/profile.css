@@ -1,0 +1,270 @@
+.wrapper{
+    background-color: #fff;
+}
+
+header {
+    object-fit: cover;
+    background-size: cover;
+    height: 250px;
+}
+
+header i {
+    cursor: pointer;
+    float: right;
+    margin-right: 10px;
+    margin-top: 10px;
+    font-size: 24px !important;
+    color: #fff;
+}
+
+
+main {
+    padding: 20px 20px 0px 20px;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.photo {
+    object-fit: cover;
+    width: 200px;
+    height: 200px;
+    margin-top: -120px;
+    border-radius: 50%;
+    border: 4px solid #fff;
+}
+
+.status{
+    width: 20px;
+    height: 20px;
+    border-radius: 20px;
+    position: absolute;
+    right: calc(50% - 70px);
+    top: 75px;
+    border: 3px solid #fff;
+}
+
+.active{
+    background-color: springgreen;
+}
+
+.offline{
+    background-color: dimgray;
+}
+
+.upload-picture{
+    min-height: 30vh;
+}
+
+.profile-article-date, .profile-comment-date{
+    color: gray;
+    display: inline-block;
+    float: right;
+}
+
+.name {
+    margin-top: 20px;
+    font-weight: 600;
+    font-size: 18pt;
+    color: #777;
+}
+
+.info {
+    margin-top: -5px;
+    margin-bottom: 5px;
+    font-size: 11pt;
+    color: #aaa;
+}
+
+.stats {
+    margin-top: 25px;
+    text-align: center;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #ededed;
+}
+
+
+.number-stat {
+    padding: 0px;
+    font-size: 14pt;
+    font-weight: bold;
+    color: #aaa;
+}
+
+.desc-stat {
+    margin-top: -15px;
+    font-size: 10pt;
+    color: #bbb;
+}
+
+.desc {
+    width: 90%;
+    word-wrap: break-word;
+    text-align: center;
+    margin: 25px 40px;
+    color: #999;
+    font-size: 11pt;
+    padding-bottom: 25px;
+    border-bottom: 1px solid #ededed;
+}
+
+.social {
+    margin: 5px 0 12px 0;
+    text-align: center;
+    display: inline-block;
+    font-size: 20pt;
+}
+
+.social i {
+    cursor: pointer;
+    margin: 0 15px;
+}
+
+.social i:nth-child(1)  { color: #4267b2; }
+.social i:nth-child(2)  { color: #1da1f2; }
+.social i:nth-child(3)  { color: #bd081c; }
+.social i:nth-child(4)  { color: #36465d; }
+
+.right {
+    padding: 0 25px 0 25px !important;
+    text-align: left;
+}
+
+.profile-nav {
+    display: inline-flex;
+
+}
+
+.profile-nav li {
+    margin: 40px 30px 0 10px;
+    cursor: pointer;
+    font-size: 13pt;
+    font-weight: bold;
+    color: #888;
+}
+
+.profile-nav li:hover {
+    color: #999;
+    border-bottom: 2px solid #999;
+}
+
+.active-tab{
+    color: #999;
+    border-bottom: 2px solid #999;
+}
+
+.report {
+    position: absolute;
+    right: 8%;
+    top: 35px;
+    font-size: 11pt;
+    background-color: #cc181e;
+    color: #fff;
+    padding: 8px 15px;
+    cursor: pointer;
+    transition: all .4s;
+    font-weight: 400;
+}
+
+.report:hover {
+    box-shadow: 0 0 15px rgba(0,0,0,0.2), 0 0 15px rgba(0,0,0,0.2);
+}
+
+
+.gallery  {
+    margin-top: 35px;
+}
+
+.gallery div {
+    margin-bottom: 30px;
+}
+
+
+.gallery img {
+    box-shadow: 0 3px 6px rgba(0,0,0,0.10), 0 3px 6px rgba(0,0,0,0.10);
+    width: auto;
+    height: auto;
+    cursor: pointer;
+    max-width: 100%;
+}
+
+.custom-counter {
+    overflow:hidden !important;
+
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+.custom-counter a{
+    /* Vertical align fixes the overflow margin problem.*/
+    vertical-align: bottom;
+    display: inline-block;
+    white-space: nowrap;
+    overflow:hidden !important;
+    text-overflow: ellipsis;
+    width: 70% !important;
+    color: #888;
+}
+
+.custom-counter a:hover{
+    color: #323232;
+}
+
+.custom-counter li {
+    counter-increment: step-counter;
+    margin-bottom: 10px;
+}
+
+.custom-counter li::before {
+    content: counter(step-counter);
+    margin-right: 5px;
+    font-size: 80%;
+    background-color: #888;
+    color: white;
+    font-weight: bold;
+    padding: 3px 8px;
+    border-radius: 3px;
+}
+
+.thumbnail{
+    max-height: 31vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.modal-title{
+    text-align: left;
+}
+
+h4{
+    text-align: left;
+}
+
+#file{
+    position: relative !important;
+}
+
+
+@media (max-width:800px) {
+    header {
+        height: 400px;
+    }
+
+    header i {
+        right: -90%;
+    }
+}
+
+
+@media (max-width:990px) {
+    .active {
+        right: calc(50% - 60px);
+        top: 50px;
+    }
+}
+
