@@ -69,46 +69,144 @@ Web application 3.1 ( No web.xml used for this project. Java configuration inclu
 For MySQL Database 
 
 ```
-You have to edit paintLogin.java Servlet to handle SQL communications if it is not compatible with your database.
-Also you need to configure context data source and fill the necessary blanks.
+You have to edit application.properties for your own usage.
 If you want to use any database other than MySQL, you have to make necessary changes.
+
 ```
 
 For Tomcat Application Server
 
 ```
-Use Tomcat 8 or above. If you are running in online server like Amazon Elastic Beanstalk read the steps in paintLogin.java
-and make changes to Data Source.
+Use Tomcat 8.5.23. 
+
 ```
 
 ### Database 
-This is a simple application so it has a simple database. SQL Script is below.
+This application uses hibernate and cascading. SQL Script is below.
 
 ```
-CREATE TABLE Users (
-	UserID int NOT NULL AUTO_INCREMENT,
-    Username varchar(40) UNIQUE NOT NULL,
-    UserPassword varchar(40) NOT NULL,
-    UserEmail varchar(40) NOT NULL,
-    PRIMARY KEY(UserID),
-    CONSTRAINT users_unique UNIQUE (Username)
+
+DROP TABLE IF EXISTS `user_detail`;
+
+CREATE TABLE `user_detail` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `type` varchar(45) NOT NULL,
+  `user_bio` TEXT,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `user`;
+
+CREATE TABLE `user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `sso_id` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `state` varchar(45) NOT NULL,
+  `user_detail_id` int(11),
+  PRIMARY KEY (`id`),
+  UNIQUE(`sso_id`),
+  UNIQUE (`email`),
+  FOREIGN KEY (`user_detail_id` ) REFERENCES `user_detail` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `category`;
+
+CREATE TABLE `category` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `article`;
+
+CREATE TABLE `article` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category` int(11) NOT NULL,
+  `article_header` TEXT NOT NULL,
+  `article_body` TEXT NOT NULL,
+  `article_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `user` (`id`),
+  FOREIGN KEY (`category`) REFERENCES `category` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+DROP TABLE IF EXISTS `comment`;
+
+CREATE TABLE `comment` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `comment_owner` varchar(45) NOT NULL,
+  `comment_owner_ssoid` varchar(45) NOT NULL,
+  `comment_body` TEXT NOT NULL,
+  `comment_date` TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `article_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`article_id`) REFERENCES `article` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+DROP TABLE IF EXISTS `persistent_logins`;
+
+CREATE TABLE `persistent_logins` (
+    `username` VARCHAR(64) NOT NULL,
+    `series` VARCHAR(64) NOT NULL,
+    `token` VARCHAR(64) NOT NULL,
+    `last_used` TIMESTAMP NOT NULL,
+    PRIMARY KEY (`series`)
 );
+
+DROP TABLE IF EXISTS `verification_token`;
+
+CREATE TABLE `verification_token` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(255) NOT NULL,
+  `expiry_date` TIMESTAMP NOT NULL,
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  FOREIGN KEY (`user_id`) REFERENCES `user` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+
+
+SET FOREIGN_KEY_CHECKS = 1;
 
 ```
 
 
 ## Built With
 
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [JSColor](http://jscolor.com/) - Color selecting
-* [GSON](https://github.com/google/gson) - JSON Object converting 
+* [Spring MVC](https://spring.io) - Spring 4.3.10.RELEASE
+* [Spring Security](https://projects.spring.io/spring-security) - Spring Security 3.2.5
+* [Hibernate](http://hibernate.org) - Hibernate 5.2.10.Final and Hibernate Validator
 * [Connector/J](https://dev.mysql.com/downloads/connector/j/5.1.html) - Connecting to MySQL Database Server
 * [Jquery](https://jquery.com/) - AJAX Requests 
 
+### Other Libraries
+
+* jackson-annotations-2.8.0
+* jackson-core-2.8.2
+* jackson-databind-2.8.2
+* jstl-1.2
+* mchange-commons-java-0.2.11
+* c3p0-0.9.5.2
+* hibernate-c3p0-5.2.10.Final
+* hibernate-validator-5.4.1.Final
+* javax.mail-1.4.7
+* commons-fileupload-1.3.2
+* commons-io-2.5
+* javax.servlet-api-3.1.0
+* hibernate-ehcache-5.2.10.Final
+* ehcache-2.10.4
+* slf4j-api-1.7.25
+
 
 ## Known Bugs
-* There is a bug on mobile or tablets that prevents you from picking a color, you have to spam the button.
-* If the server gets overloaded with data It can crash. See Disclaimer for recommended comminication ways.
+* When an admin changes the category name, the image of the category will not change.
+* Admin panel is missing some components.
+* If an user changes his/her full name, their previous comments will not update to the new name.
+* Some UI bugs.
 
 ## Contributing
 
@@ -129,21 +227,8 @@ This project does not have versioning and made with learning purposes.
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/Exercon/Painterino-Online-Paint/blob/master/LICENSE) file for details.
 
-JSColor has different license. [JSLicense](http://www.gnu.org/licenses/gpl-3.0.txt) - for details
-visit their page [JSColor](http://jscolor.com/)
-
-GSON has different license. [License](http://www.apache.org/licenses/LICENSE-2.0) - for details 
-visit their page [GSON](https://github.com/google/gson)
-
-Connector/J [License](https://downloads.mysql.com/docs/licenses/connector-j-5.1-gpl-en.pdf) - for details
-visit their page [MySQL](https://dev.mysql.com/downloads/connector/j/5.1.html)
-
 
 ## Acknowledgments
-
-* A huge thanks to BalusC for his [post](https://stackoverflow.com/questions/3679465/find-number-of-active-sessions-created-from-a-given-client-ip/3679783#3679783)
-* Another huge thanks to [GSON](https://github.com/google/gson)
-* Readme template by [PurpleBooth](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2)
 * Login screen [Aigars Silkalns](https://codepen.io/colorlib/)
 
 # Questions
