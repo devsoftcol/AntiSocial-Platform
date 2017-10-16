@@ -206,7 +206,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 * When an admin changes the category name, the image of the category will not change.
 * Admin panel is missing some components.
 * If an user changes his/her full name, their previous comments will not update to the new name.
-* Some UI bugs.
+* Some UI bugs in mobile.
 
 ## Contributing
 
@@ -225,11 +225,12 @@ This project does not have versioning and made with learning purposes.
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/Exercon/Painterino-Online-Paint/blob/master/LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE.md](https://github.com/Exercon/AntiSocial-Platform/blob/master/LICENSE) file for details.
 
 
 ## Acknowledgments
 * Login screen [Aigars Silkalns](https://codepen.io/colorlib/)
+* Profile page [Thomas d'Aubenton](https://codepen.io/ThomasDaubenton/)
 
 # Questions
 If you have any questions mail me -  antkaynak1@gmail.com
