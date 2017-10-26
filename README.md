@@ -197,7 +197,6 @@ SET FOREIGN_KEY_CHECKS = 1;
 * commons-fileupload-1.3.2
 * commons-io-2.5
 * javax.servlet-api-3.1.0
-* hibernate-ehcache-5.2.10.Final
 * ehcache-2.10.4
 * slf4j-api-1.7.25
 
