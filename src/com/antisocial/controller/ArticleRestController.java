@@ -170,8 +170,9 @@ public class ArticleRestController {
 
         return articleDTOList;
     }
-
-
+    
+    
+    // You can create a Date Utils class for the methods below
     private ZoneId resolveZoneId(HttpServletRequest request) {
         TimeZone timeZone = RequestContextUtils.getTimeZone(request);
         return (timeZone != null ? timeZone.toZoneId() : ZoneId.systemDefault());
