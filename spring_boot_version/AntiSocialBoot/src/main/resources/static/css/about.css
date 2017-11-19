@@ -1,0 +1,92 @@
+
+@-webkit-keyframes typing { from { width: 0; } }
+@-webkit-keyframes blink-caret { 50% { border-color: transparent; } }
+
+h1 {
+    text-align: left;
+    font: bold 300% Consolas, Monaco, monospace;
+    border-right: .1em solid black;
+    width: 16.5em;
+    width: 21ch;
+    margin: 2em 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    -webkit-animation: typing 2s steps(21, end),
+    blink-caret .5s step-end infinite alternate;
+}
+
+/* Accordion */
+
+.accordion{
+    text-align: left;
+    margin-top: 5%;
+}
+
+.tab {
+    position: relative;
+    margin-bottom: 1px;
+    width: 100%;
+    color: #323232;
+    overflow: hidden;
+}
+.tab input {
+    position: absolute;
+    opacity: 0;
+    z-index: -1;
+}
+
+label {
+    position: relative;
+    display: block;
+    padding: 0 0 0 1em;
+    background: #323232;
+    font-weight: bold;
+    line-height: 3;
+    cursor: pointer;
+    width: 100%;
+    margin-bottom: 0 !important;
+    color: #fff;
+}
+.tab-content {
+    max-height: 0;
+    overflow: hidden;
+    background: lightgray;
+    -webkit-transition: max-height .35s;
+    -o-transition: max-height .35s;
+    transition: max-height .35s;
+}
+
+.tab-content p {
+    margin: 1em;
+    font-weight: bold;
+}
+/* :checked */
+input:checked ~ .tab-content {
+    max-height: 10em;
+}
+/* Icon */
+label::after {
+    position: absolute;
+    right: 0;
+    top: 0;
+    display: block;
+    width: 3em;
+    height: 3em;
+    line-height: 3;
+    text-align: center;
+    -webkit-transition: all .35s;
+    -o-transition: all .35s;
+    transition: all .35s;
+}
+input[type=checkbox] + label::after {
+    content: "+";
+}
+input[type=radio] + label::after {
+    content: "\25BC";
+}
+input[type=checkbox]:checked + label::after {
+    transform: rotate(315deg);
+}
+input[type=radio]:checked + label::after {
+    transform: rotateX(180deg);
+}
