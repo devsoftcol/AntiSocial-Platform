@@ -3,10 +3,14 @@
 
 A simple social platform to write articles on topics or comment to other's articles!
 
+##  Update
+Spring Boot version has been added.
+It has the same features but made with Spring Boot 2.0.0+
+Make sure to check it out! :)
+
 ## Some Screenshots
 
 ![alt text](https://github.com/Exercon/AntiSocial-Platform/blob/master/Pictures/Screenshot%20from%202017-10-16%2001-18-34.png)
-
 
 ![alt text](https://github.com/Exercon/AntiSocial-Platform/blob/master/Pictures/Screenshot%20from%202017-10-16%2001-20-22.png)
 
